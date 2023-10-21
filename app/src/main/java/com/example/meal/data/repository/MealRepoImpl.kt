@@ -13,7 +13,7 @@ class MealRepoImpl @Inject constructor(
 
     override suspend fun getMeals(mealId: String): List<MealDTO> {
         val response =  api.getMeals("https://www.themealdb.com/api/json/v1/1/search.php/",mealId)
-        Log.d("MYTAG", response.toString())
+        //Log.d("MYTAG", response.toString())
         return response.meals
     }
 }

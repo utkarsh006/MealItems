@@ -5,4 +5,4 @@ object Constants {
     const val PARAM_MEAL_ID = "mealId"
 }
 
-//https://www.themealdb.com/api/json/v1/1/   search.php?s=Chicken
+//API Link : https://www.themealdb.com/api/json/v1/1/search.php?s=Chicken
