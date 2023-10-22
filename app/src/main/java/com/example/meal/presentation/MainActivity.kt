@@ -15,7 +15,7 @@ import androidx.navigation.navArgument
 import com.example.meal.domain.model.Meal
 import com.example.meal.presentation.meal_detail.MealDetailScreen
 import com.example.meal.presentation.meal_list.MealListScreen
-import com.example.meal.presentation.theme.CryptoTheme
+import com.example.meal.presentation.ui.MealTheme
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CryptoTheme {
+            MealTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
