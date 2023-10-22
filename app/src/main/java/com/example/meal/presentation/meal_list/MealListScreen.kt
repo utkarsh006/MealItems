@@ -17,9 +17,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.meal.data.remote.dto.toMeal
 import com.example.meal.presentation.Screen
 import com.example.meal.presentation.meal_list.components.MealListItem
+import com.google.gson.Gson
 
 @Composable
 fun MealListScreen(
@@ -35,13 +35,17 @@ fun MealListScreen(
 
                 MealListItem(
                     meal = meal,
-                    onItemClicked = { navController.navigate(Screen.MealDetailScreen.route + "/${meal.idMeal}") }
+                    onItemClicked = {
+                        val mealString = Gson().toJson(meal)
+                        navController.navigate(
+                            Screen.MealDetailScreen.route + "?meal=$mealString"
+                        )
+                    }
                 )
-
             }
         }
 
-        //If the error occurs
+        // If the error occurs
         if (state.error.isNotBlank()) {
             Text(
                 text = state.error,

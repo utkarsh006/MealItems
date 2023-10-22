@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface FoodApi {
-    @GET("api/json/v1/1/search.php/")
+    @GET("api/json/v1/1/search.php")
     suspend fun getMeals(@Query("s") mealId: String): ChickenData
 }
 
