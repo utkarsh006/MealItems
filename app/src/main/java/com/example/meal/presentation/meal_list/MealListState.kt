@@ -1,6 +1,5 @@
 package com.example.meal.presentation.meal_list
 
-import com.example.meal.data.remote.dto.MealDTO
 import com.example.meal.domain.model.Meal
 
 data class MealListState(
