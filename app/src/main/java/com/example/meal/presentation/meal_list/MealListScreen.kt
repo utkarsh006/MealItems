@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.meal.presentation.Screen
-import com.example.meal.presentation.composables.SimpleSearchBar
+import com.example.meal.presentation.composables.SearchComponent
 import com.example.meal.presentation.meal_list.components.MealListItem
 import com.google.gson.Gson
 
@@ -33,7 +33,7 @@ fun MealListScreen(
     Log.d("List", state.meals.toString())
     Column(modifier = Modifier.fillMaxSize()) {
         // Search Bar
-        SimpleSearchBar(
+        SearchComponent(
             query = state.searchQuery,
             onQueryChange = { query ->
                 viewModel.searchMeals(query)

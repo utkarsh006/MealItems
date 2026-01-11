@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SimpleSearchBar(
+fun SearchComponent(
     query: String,
     onQueryChange: (String) -> Unit,
     modifier: Modifier = Modifier

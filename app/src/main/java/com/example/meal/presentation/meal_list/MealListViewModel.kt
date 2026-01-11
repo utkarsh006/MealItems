@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meal.common.Resource
+import com.example.meal.domain.model.Meal
 import com.example.meal.domain.usecases.get_meals.GetMealsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -20,7 +21,7 @@ class MealListViewModel @Inject constructor(
     val state: State<MealListState> get() = _state // exposing this state to the composables
 
     // Cache for search functionality
-    private var fullMealsList: List<com.example.meal.domain.model.Meal> = emptyList()
+    private var fullMealsList: List<Meal> = emptyList()
 
     init {
         getMeals("Chicken")
