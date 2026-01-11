@@ -19,6 +19,9 @@ class MealListViewModel @Inject constructor(
     private val _state = mutableStateOf(MealListState())
     val state: State<MealListState> get() = _state // exposing this state to the composables
 
+    // Cache for search functionality
+    private var fullMealsList: List<com.example.meal.domain.model.Meal> = emptyList()
+
     init {
         getMeals("Chicken")
     }
@@ -28,7 +31,13 @@ class MealListViewModel @Inject constructor(
         getMealsUseCase().onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _state.value = MealListState(meals = result.data ?: emptyList())
+                    val meals = result.data ?: emptyList()
+                    _state.value = MealListState(meals = meals)
+
+                    // Cache the full list once
+                    if (fullMealsList.isEmpty()) {
+                        fullMealsList = meals
+                    }
                 }
 
                 is Resource.Error -> {
@@ -40,5 +49,19 @@ class MealListViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    // Search functionality
+    fun searchMeals(query: String) {
+        _state.value = _state.value.copy(
+            searchQuery = query,
+            meals = if (query.isBlank()) {
+                fullMealsList
+            } else {
+                fullMealsList.filter {
+                    it.strMeal.contains(query, ignoreCase = true)
+                }
+            }
+        )
     }
 }
