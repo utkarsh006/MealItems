@@ -2,11 +2,11 @@ package com.example.meal.data.repository
 
 import com.example.meal.common.Constants
 import com.example.meal.data.cache.AppDatabase
-import com.example.meal.data.cache.DataCache
 import com.example.meal.data.remote.FoodApi
 import com.example.meal.data.remote.dto.ChickenData
 import com.example.meal.data.remote.dto.MealDTO
 import com.example.meal.domain.repository.MealRepository
+import com.example.meal.util.ResponseUtil.computeResponse
 import com.google.gson.Gson
 import javax.inject.Inject
 
@@ -35,13 +35,7 @@ class MealRepoImpl @Inject constructor(
         } else {
             try {
                 val response = api.getMeals(url.substringAfterLast("s="))
-                if (response != null) {
-                    val gson = Gson()
-                    val jsonResponse = gson.toJson(response)
-                    db.dataCacheDao().insertCache(DataCache(url, jsonResponse, System.currentTimeMillis()))
-                    return jsonResponse
-                }
-                return ""
+                return computeResponse(response, url, db)
             } catch (e: Exception) {
                 e.printStackTrace()
                 return ""
